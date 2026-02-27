@@ -3,6 +3,7 @@ from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 import dotenv
 import handlers.misc
+from sheets.service import get_service
 
 
 # This sample slack application uses SocketMode
@@ -26,6 +27,11 @@ def main():
 
     # create the app
     app = App(token=SLACK_BOT_TOKEN)
+
+    # initialize the google sheets api
+    print("⚙️  Initializing Google Sheets API")
+    get_service()
+    print("✅ Google Sheets API initialized")
 
     # register the event handlers
     handlers.misc.register(app)
