@@ -2,61 +2,67 @@
 
 General purpose slackbot for automating officer workflows.
 
-The original readme is below:
+## Running Locally
 
-# Getting Started ⚡️ Bolt for Python
+### 1. Slack Setup
 
-> Slack app example from 📚 [Getting started with Bolt for Python](https://docs.slack.dev/tools/bolt-python/getting-started)
+To get started, you should first create a Slack account and your own (free) Slack workspace
+to test this app in.
 
-## Overview
+Once you have a workspace, follow the instructions from [Getting Started with Bolt for Python](https://docs.slack.dev/tools/bolt-python/getting-started/#running-the-app)
+to create the app and add it to your workspace
 
-This is a Slack app built with the [Bolt for Python framework](https://docs.slack.dev/tools/bolt-python/) that showcases responding to events and interactive buttons.
+### 2. Environment Setup
 
-## Running locally
+To run this app locally, you'll need to create a `.env` file with the following values
+in the root directory of this project:
 
-### 1. Setup environment variables
-
-```zsh
-# Replace with your tokens
-export SLACK_BOT_TOKEN=<your-bot-token>
-export SLACK_APP_TOKEN=<your-app-level-token>
+```bash
+SLACK_BOT_TOKEN=<your-bot-token>
+SLACK_APP_TOKEN=<your-app-level-token>
 ```
 
-### 2. Setup your local project
+Then, you'll also want to create a virtual environment and install the dependencies by running
+the following commands in your terminal:
 
-```zsh
-# Clone this project onto your machine
-git clone https://github.com/slack-samples/bolt-python-getting-started-app.git
-
-# Change into this project
-cd bolt-python-getting-started-app/
-
-# Setup virtual environment
-python3 -m venv .venv
+```bash
+uv venv .venv --python=3.14
 source .venv/bin/activate
-
-# Install the dependencies
 pip install -r requirements.txt
 ```
 
+> If you don't have uv, you can install it by following [these instructions](https://docs.astral.sh/uv/getting-started/installation/)
+> Or, you could use an alternative virtual environment manager. For example, `python3 -m venv .venv`
+
 ### 3. Start servers
+
+Now that you have your environment set up, you can start the app by running the following command:
 
 ```zsh
 python3 app.py
 ```
 
+To stop the app, press `CTRL+C` (or `Command+C` on a Mac) in your terminal.
+
+## Project Structure
+
+The project is structured as follows:
+
+```bash
+.
+├── app.py
+├── handlers
+│   ├── __init__.py
+│   └── misc.py
+├── requirements.txt
+└── README.md
+```
+
+All the files in the `handlers` directory should contain event handlers for the app. To add a new
+file, create a new file in the `handlers` directory and add the event handlers to it. Make sure to
+define a function called `register(app: App)` in the file (see `handlers/misc.py`) and call that
+`register` function in the `app.py` file.
+
 ## More examples
 
 Looking for more examples of Bolt for Python? Browse to [bolt-python/examples/](https://github.com/slackapi/bolt-python/tree/main/examples) for a long list of usage, server, and deployment code samples!
-
-## Contributing
-
-### Issues and questions
-
-Found a bug or have a question about this project? We'd love to hear from you!
-
-1. Browse to [slackapi/bolt-python/issues](https://github.com/slackapi/bolt-python/issues/new/choose)
-1. Create a new issue
-1. Mention that you're using this example app
-
-See you there and thanks for helping to improve Bolt for everyone!
