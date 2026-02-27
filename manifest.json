@@ -11,11 +11,18 @@
     "bot_user": {
       "display_name": "ACM Slackbot",
       "always_online": true
-    }
+    },
+    "slash_commands": [
+      {
+        "command": "/listpeople",
+        "description": "Example sheets command",
+        "should_escape": false
+      }
+    ]
   },
   "oauth_config": {
     "scopes": {
-      "bot": ["channels:history", "chat:write", "im:history"]
+      "bot": ["channels:history", "chat:write", "im:history", "commands"]
     }
   },
   "settings": {

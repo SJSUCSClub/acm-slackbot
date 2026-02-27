@@ -1,4 +1,5 @@
 from slack_bolt import App
+from sheets.example import get_names_and_majors
 
 
 # Most examples just show @app.message("hello") before the function
@@ -32,6 +33,25 @@ def action_button_click(body, ack, say):
     ack()
     say(f"<@{body['user']['id']}> clicked the button")
 
+# @app.command("/listpeople")
+def command_listnames(ack, respond, command):
+    # Acknowledge the command
+    ack()
+    
+    people = get_names_and_majors()
+    block_texts = ["List of people:"]
+    for person in people:
+        block_texts.append(f"- {person}")
+    respond(blocks=[
+        {
+            "type": "section",
+            "text": {
+                "type": "mrkdwn",
+                "text": "\n".join(block_texts)
+            }
+        }
+    ])
+
 def register(app: App):
     """
     Function to register the event handlers defined in this module.
@@ -51,3 +71,4 @@ def register(app: App):
     # run on "hi", "hello", or "hey"
     app.message("hi|hello|hey")(message_hello)
     app.action("button_click")(action_button_click)
+    app.command("/listpeople")(command_listnames)
