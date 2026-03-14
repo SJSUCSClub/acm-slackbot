@@ -1,5 +1,6 @@
-from slack_bolt import App
+from slack_bolt import App  
 from sheets.example import get_names_and_majors
+import time
 
 
 # Most examples just show @app.message("hello") before the function
@@ -66,7 +67,26 @@ def register(app: App):
     Returns
     -------
     None
+
     """
+    @app.command("/ping")
+    def ping(ack, respond):
+        start = time.time()
+        ack()
+        latency = (time.time() - start)*1000
+        respond(f"Pong ({latency:.3f}s)")
+
+    @app.command("/version")
+    def version(ack, respond):
+        ack()
+        respond("ACM Slackbot 1.0.0")
+
+    # @app.message("^ping$")  # Listen for messages that are exactly "ping"
+    # def message_ping(message, say):
+    #     message_ts = float(message['ts'])
+    #     latency = (time.time() - message_ts)
+    #     say(f"Pong ({latency:.3f}s)")
+
     # Register the event handlers
     # run on "hi", "hello", or "hey"
     app.message("hi|hello|hey")(message_hello)
