@@ -61,4 +61,4 @@ def register(app: App):
              respond("Error scheduling message.")
     @app.command("/cancelreminder")
     def cancel(ack, respond, command):
-        pass #TO-DO: make the scheduler cancelable with a user friendly interface
+        ack() #TO-DO: make the scheduler cancelable with a user friendly interface
