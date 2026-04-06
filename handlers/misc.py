@@ -78,7 +78,7 @@ def register(app: App):
     @app.command("/version")
     def version(ack, respond):
         ack()
-        respond("ACM Slackbot 1.0.0")
+        respond("ACM Slackbot 1.0.1")
 
     # @app.message("^ping$")  # Listen for messages that are exactly "ping"
     # def message_ping(message, say):
