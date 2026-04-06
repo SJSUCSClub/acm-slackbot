@@ -15,24 +15,39 @@
         "slash_commands": [
             {
                 "command": "/listpeople",
-                "description": "Example sheets command",
+                "description": "Example sheets command.",
                 "should_escape": false
             },
             {
                 "command": "/ping",
-                "description": "Determine current latency",
+                "description": "Determine current latency.",
                 "should_escape": false
             },
             {
                 "command": "/version",
-                "description": "Displays slackbot version",
+                "description": "Displays slackbot version.",
+                "should_escape": false
+            },
+            {
+                "command": "/reminder",
+                "description": "Schedules a reminder at specified time.",
+                "usage_hint": "[24 hour] [weekday] [message]",
+                "should_escape": true
+            },
+            {
+                "command": "/cancelreminder",
+                "description": "Lists options of reminders to delete.",
                 "should_escape": false
             }
         ]
     },
     "oauth_config": {
         "scopes": {
+            "user": [
+                "users:read"
+            ],
             "bot": [
+                "users:read",
                 "channels:history",
                 "chat:write",
                 "commands",
