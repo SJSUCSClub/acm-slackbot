@@ -3,8 +3,8 @@ from slack_bolt import App
 from slack_bolt.adapter.socket_mode import SocketModeHandler
 import dotenv
 import handlers.misc
+import handlers.reminders
 from sheets.service import get_service
-
 
 # This sample slack application uses SocketMode
 # For the companion getting started setup guide,
@@ -19,7 +19,6 @@ def main():
     if not SLACK_BOT_TOKEN:
         print("Missing SLACK_BOT_TOKEN. Please set it in the .env file or as an environment variable.")
         exit(1)
-    
     SLACK_APP_TOKEN = os.environ.get("SLACK_APP_TOKEN")
     if not SLACK_APP_TOKEN:
         print("Missing SLACK_APP_TOKEN. Please set it in the .env file or as an environment variable.")
@@ -32,10 +31,9 @@ def main():
     print("⚙️  Initializing Google Sheets API")
     get_service()
     print("✅ Google Sheets API initialized")
-
     # register the event handlers
+    handlers.reminders.register(app)
     handlers.misc.register(app)
-
     SocketModeHandler(app, app_token=SLACK_APP_TOKEN).start()
 
 

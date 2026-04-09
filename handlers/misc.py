@@ -2,7 +2,6 @@ from slack_bolt import App
 from sheets.example import get_names_and_majors
 import time
 
-
 # Most examples just show @app.message("hello") before the function
 # This is just syntactic sugar for app.message("hello")(message_hello)
 # Since we don't have the app object yet, we can't call app.message
@@ -79,7 +78,7 @@ def register(app: App):
     @app.command("/version")
     def version(ack, respond):
         ack()
-        respond("ACM Slackbot 1.0.0")
+        respond("ACM Slackbot 1.0.1")
 
     # @app.message("^ping$")  # Listen for messages that are exactly "ping"
     # def message_ping(message, say):
